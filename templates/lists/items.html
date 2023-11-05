@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ url_user.username }}'s {{ from_list.name }} list
+{% endblock title %}
+
+{% block base_top_title %}
+Viewing <a href="{% url 'lists' user_pk=url_user.pk %}"><b>{{ url_user.username }}</b></a>'s 
+<b>{{ from_list.name }}</b> list.
+{% endblock base_top_title %}
+
+{% block base_content %}
+{% for list_item in list_item__list %}
+<div class="d-flex justify-content-center mb-4">
+    <a class="btn btn-outline-dark d-flex justify-content-start" 
+    href="{% url 'list-items-detail' user_pk=user_pk list_pk=list_pk pk=list_item.pk %}">
+    <div class="pe-2" style="min-width: 5vw; word-wrap: break-word;">
+        {{ list_item.rating }}
+    </div>
+    <div class="vr" style="width: 2px;"></div>
+    <div  style="min-width: 40vw;">
+        {{ list_item.name }} 
+    </div>
+    </a>
+<div class="btn-group" role="group">
+    <a class="btn btn-outline-primary my-hidden-button d-none" href="{% url 'list-items-update' user_pk=user_pk list_pk=list_pk pk=list_item.pk %}">Update</a>
+    <a class="btn btn-outline-danger my-hidden-button d-none" href="{% url 'list-items-delete' user_pk=user_pk list_pk=list_pk pk=list_item.pk %}">Delete</a>
+</div>
+</div>
+{% endfor %}
+
+{% if url_user.pk == user.pk %}
+<div class="fa-solid fa-pen-to-square" id="my-edit-button"></div>
+{% endif %}
+
+<div class="d-flex flex-column-reverse" id="my-buttons-pack">
+<a class="btn btn-danger my-hidden-button d-none" href="{% url 'lists-delete' user_pk=user_pk pk=list_pk %}">Delete current list</a>
+<a class="btn btn-dark my-hidden-button d-none" href="{% url 'list-items-create' user_pk=user_pk list_pk=list_pk %}">Create a new list item</a>
+</div>
+
+{% load static %}
+<script src="{% static 'js/edit.js' %}"></script>
+{% endblock base_content %}

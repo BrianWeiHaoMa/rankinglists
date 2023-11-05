@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags%}
+
+{% block title %}
+Delete list
+{% endblock title %}
+
+{% block base_top_title %}
+Do you want to delete your <b>{{ list.name }}</b> list?
+{% endblock base_top_title %}
+
+{% block base_content %}
+<div class="d-flex justify-content-center">
+<form method="post">{% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-outline-dark btn-lg" type="submit">Confirm delete</button>
+</form>
+</div>
+{% endblock base_content %}

@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(250, 250, 250);
+}
+
+#my-edit-button {
+    position: fixed;
+    font-size: max(4vw, 4vh);
+    top: 98%;
+    left: 99%;
+    transform: translate(-100%, -100%);
+}
+
+#my-edit-button:hover {
+    color: gray;
+    cursor: pointer;
+}
+
+#my-buttons-pack {
+    position: fixed;
+    transform: translate(-100%, -100%);
+    top: 97.2%;
+    left: calc(97% - max(4vw, 4vh));
+}
+
+#solo-form {
+    min-width: 80vw;
+    max-width: 90vw;
+}
+
+#dropup-menu {
+    transform: translate(0%, -100%);
+    position: fixed;
+    top: 98.2%;
+    left: 1%;
+}

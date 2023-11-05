@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ url_user.username }}'s {{ list_item.from_list.name }}'s {{ list_item.name }} details.
+{% endblock title %}
+
+{% block base_top_title %}
+Viewing <a href="{% url 'lists' user_pk=url_user.pk %}"><b>{{ url_user.username }}</b></a>'s <b>{{ list_item.name }}</b> list item.
+{% endblock base_top_title %}
+
+{% block base_content %}
+<div class="d-flex justify-content-center">
+    <div class="d-flex flex-column align-items-center">
+        <table class="table table-striped table-hover" style="width: 65vw;">
+            <thead>
+              <tr>
+                <th scope="col">Rating</th>
+                <th scope="col">Name</th>
+                <th scope="col">List</th>
+                <th scope="col">Date created (EST)</th>
+                <th scope="col">Date last modified (EST)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ list_item.rating }}</td>
+                <td>{{ list_item.name }}</td>
+                <td><a href="{% url 'lists-items' user_pk=user_pk list_pk=list_item.from_list.pk %}">{{ list_item.from_list.name }}</a></td>
+                <td>{{ list_item.date_created }}</td>
+                <td>{{ list_item.date_last_modified }}</td>
+              </tr>
+            </tbody>
+          </table>
+        <h4>Description</h4>
+        <p style="white-space: pre-line; max-width: 58vw; word-wrap: break-word;">
+            {{ list_item.description }} 
+        </p>
+    </div>    
+</div>
+{% if url_user.pk == user.pk %}
+<i class="fa-solid fa-pen-to-square" id="my-edit-button"></i>
+{% endif %}
+
+<div class="d-flex flex-column-reverse" id="my-buttons-pack">
+<a class="btn btn-danger my-hidden-button d-none" href="{% url 'list-items-delete' user_pk=user_pk list_pk=list_item.from_list.pk pk=list_item.pk %}">Delete current list item</a>
+<a class="btn btn-primary my-hidden-button d-none" href="{% url 'list-items-update' user_pk=user_pk list_pk=list_item.from_list.pk pk=list_item.pk %}">Update current list item</a>
+</div>
+
+{% load static %}
+<script src="{% static 'js/edit.js' %}"></script>
+{% endblock base_content %}

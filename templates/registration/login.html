@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Log in
+{% endblock title %}
+
+{% block base_top_title %}
+Log in.
+{% endblock base_top_title %}
+
+{% block base_content %}
+<div class="d-flex flex-column align-items-center pt-4">
+<form method="post" id="solo-form">{% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-outline-dark" type="submit">Log in</button>
+</form>
+<a class="pt-3" href="{% url 'signup' %}" title="Sign up">Don't have an account?</a>
+<a class="pt-3" href="{% url 'password_reset' %}" title="Password reset">Forgot your password?</a>
+</div>
+{% endblock base_content %}

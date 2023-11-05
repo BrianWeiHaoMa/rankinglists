@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+Email verification link request failed
+{% endblock title %}
+
+{% block base_top_title %}
+Email verification link request failed.
+{% endblock base_top_title %}
+
+{% block base_content %}
+<div class="d-flex justify-content-center">
+<div style=" max-width: 70vw;">
+Either the requested email has already been verified or the number of verification link requests already reached 2.
+</div>
+</div>
+{% endblock base_content %}

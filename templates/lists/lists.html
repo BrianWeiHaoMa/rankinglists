@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Lists
+{% endblock title %}
+
+{% block base_top_title %}
+Viewing <b>{{ url_user.username }}</b>'s lists. 
+{% endblock base_top_title %}
+
+{% block base_content %}
+{% for list in list_list %}
+<div class="d-flex justify-content-center mb-4">
+    <a class="btn btn-outline-dark" style="min-width: 40vw;" 
+    href="{% url 'lists-items' user_pk=user_pk list_pk=list.pk %}">
+    <i class="fa-solid fa-list pe-1"></i> {{ list.name }}
+    </a>
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <a class="btn btn-outline-primary my-hidden-button d-none" href="{% url 'lists-update' user_pk=user_pk pk=list.pk %}">Update</a>
+        <a class="btn btn-outline-danger my-hidden-button d-none" href="{% url 'lists-delete' user_pk=user_pk pk=list.pk %}">Delete</a>
+    </div>
+    {% if list.is_private %}
+    <div class="rounded-2 px-3 ms-2 bg-danger text-white d-flex align-items-center my-hidden-button d-none">Private</div>
+    {% else %}
+    <div class="rounded-2 px-3 ms-2 bg-success text-white d-flex align-items-center my-hidden-button d-none">Public</div>
+    {% endif %}
+</div>
+{% endfor %}
+
+{% if user.is_authenticated and url_user.pk == user.pk %}
+<div class="fa-solid fa-pen-to-square" id="my-edit-button"></div>
+{% endif %}
+
+<div class="d-flex flex-column-reverse" id="my-buttons-pack">
+<a class="btn btn-dark my-hidden-button btn-lg d-none" id="my-create-button" href="{% url 'lists-create' user_pk=user_pk %}">Create a new list</a>
+</div>
+
+{% load static %}
+<script src="{% static 'js/edit.js' %}"></script>
+{% endblock base_content %}

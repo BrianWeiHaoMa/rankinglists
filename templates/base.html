@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>{% block title %} Ranking lists {% endblock title %}</title>
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- https://www.w3schools.com/w3css/tryit.asp?filename=tryw3css_templates_webpage&stacked=h -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+    
+    <script src="https://kit.fontawesome.com/a93b260e6c.js" crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
+</head>
+<body style="padding-bottom: 50vh;">
+    <div style="min-width: 100vw; min-height: 4vh; margin-bottom: 2vh; padding: min(2vh, 2vw);" class="w3-theme d-flex justify-content-center align-items-center">
+        <div class="w3-bar-item">
+            {% block base_top_title %}
+                base_top_title
+            {% endblock base_top_title %}
+        </div>
+    </div>
+    
+    {% block base_content %} 
+    base_content
+    {% endblock base_content %}
+    
+    <div class="btn-group dropup" id="dropup-menu"> 
+        <button type="button" class="fa-solid fa-bars btn btn-light" data-bs-toggle="dropdown" aria-expanded="false" style="font-size: max(3vw, 3vh);" title="Menu">
+        </button>
+        <ul class="dropdown-menu">
+            {% if user.is_authenticated %}
+            <li><a class="dropdown-item" href="{% url 'lists-entry' %}">My lists</a></li>
+            <li><a class="dropdown-item" href="{% url 'users' %}">Other users</a></li>
+            <li><a class="dropdown-item" href="{% url 'info' %}">Info page</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Log out</a></li>
+            {% else %}
+            <li><a class="dropdown-item" href="{% url 'users' %}">Other users</a></li>
+            <li><a class="dropdown-item" href="{% url 'info' %}">Info page</a></li>
+            <li><a class="dropdown-item" href="{% url 'login' %}">Log in</a></li>
+            <li><a class="dropdown-item" href="{% url 'signup' %}">Sign up</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>

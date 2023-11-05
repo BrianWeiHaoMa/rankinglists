@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+Other users
+{% endblock title %}
+
+{% block base_top_title %}
+Viewing other users.
+{% endblock base_top_title %}
+
+{% block base_content %}
+{% for other_user in user_list %}
+    <div class="d-flex justify-content-center mt-4">
+        {% if other_user.pk == user.pk  %}
+        <a class="btn btn-outline-success" style="min-width: 30vw;" 
+        href="{% url 'lists' user_pk=other_user.pk %}">
+        <i class="fa-solid fa-user"></i> {{ other_user.username }}
+        </a>
+        {% elif other_user.is_superuser %}
+        <a class="btn btn-outline-warning" style="min-width: 30vw;" 
+        href="{% url 'lists' user_pk=other_user.pk %}">
+        <i class="fa-solid fa-user"></i> {{ other_user.username }}
+        </a>
+        {% else %}
+        <a class="btn btn-outline-dark" style="min-width: 30vw;" 
+        href="{% url 'lists' user_pk=other_user.pk %}">
+        <i class="fa-solid fa-user"></i> {{ other_user.username }}
+        </a>
+        {% endif %}
+    </div>
+{% endfor %}
+{% endblock base_content %}

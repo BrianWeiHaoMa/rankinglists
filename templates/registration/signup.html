@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+Sign up
+{% endblock title %}
+
+{% block base_top_title %}
+Sign up.
+{% endblock base_top_title %}
+
+{% block base_content %}
+<div class="d-flex flex-column align-items-center pt-4">
+<form method="post" id="solo-form" autocomplete="off">{% csrf_token %}
+    {{ form|crispy }}
+    <button class="btn btn-outline-dark" type="submit">Sign up</button>
+</form>
+<a class="pt-1" href="{% url 'request-new-link-from-email' %}" title="Request a new verification link">Request a new verification link</a>
+<a class="pt-1" href="{% url 'login' %}" title="Login">Already have an account?</a>
+</div>
+{% endblock base_content %}
